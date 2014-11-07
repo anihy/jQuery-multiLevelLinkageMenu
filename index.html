@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="./js/jquery.js"></script>
+    <script src="./js/jQuery.multiLevelLinkageMenu.js"></script>
+    <script>
+    $(function() {
+        $.multilevelLinkageMenu({
+            multiMenuMark: 'access',
+            handler: {
+                //一级菜单的处理函数,如果存在 则可用于一级菜单的初始化,
+                //currenSelect 为一级菜单的 select jQuery DOM 引用
+                menu1: function(currentSelect) {
+                    console.log('init level1 menu');
+                },
+                //二级菜单的处理函数,当上一级菜单更新的时候,
+                //会调用该处理函数进行二级菜单的初始化 ,
+                //prevSelect 为上一级菜单的 select jQuery DOM 引用: 也就是一级菜单
+                //currenSelect 为当前菜单的 select jQuery DOM 引用: 也就是二级菜单: 
+                menu2: function(prevSelect, currentSelect) {
+                    console.log('update level2 menu');
+                    console.log(prevSelect.attr('data-multimenu-level') + ' ' + currentSelect.attr('data-multimenu-level'));
+                    currentSelect.append('<option>' + (new Date()).getTime() + '</option>');
+                },
+                //同上
+                menu3: function(prevSelect, currentSelect) {
+                    console.log('update level3 menu');
+                    currentSelect.append('<option>' + (new Date()).getTime() + '</option>');
+                },
+                menu4: function(prevSelect, currentSelect) {
+                    console.log('update level4 menu');
+                    currentSelect.append('<option>' + (new Date()).getTime() + '</option>');
+                }
+            }
+        });
+    });
+    </script>
+</head>
+
+<body>
+    <div class="form-group">
+        <label>详细地址:</label>
+        <select class="form-control" data-multimenu-id="access" data-multimenu-level="1">
+            <option value="">options1</option>
+            <option value="">options2</option>
+            <option value="">options3</option>
+            <option value="">options4</option>
+            <option value="">options5</option>
+        </select>
+        <select class="form-control" data-multimenu-id="access" data-multimenu-level="2" data-multimenu-init="选择城市">
+            <option value="">options1</option>
+            <option value="">options2</option>
+            <option value="">options3</option>
+            <option value="">options4</option>
+            <option value="">options5</option>
+        </select>
+        <select class="form-control" data-multimenu-id="access" data-multimenu-level="3" data-multimenu-init="选择区域">
+            <option value="">options1</option>
+            <option value="">options2</option>
+            <option value="">options3</option>
+            <option value="">options4</option>
+            <option value="">options5</option>
+        </select>
+        <select class="form-control" data-multimenu-id="access" data-multimenu-level="4" data-multimenu-init="选择商圈">
+            <option value="">options1</option>
+            <option value="">options2</option>
+            <option value="">options3</option>
+            <option value="">options4</option>
+            <option value="">options5</option>
+        </select>
+    </div>
+</body>
+
+</html>
